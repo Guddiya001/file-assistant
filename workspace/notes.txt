@@ -2,3 +2,4 @@ MCP stands for Model Context Protocol.
 MCP servers expose tools, resources, and prompts.
 Tools allow AI applications to invoke capabilities.
 Python is useful for building AI applications.
+The abbreviation uv in Python usually refers to uv package, which is a fast Python package installer and resolver (an alternative to pip). It’s written in Rust and designed for speed and reliability.

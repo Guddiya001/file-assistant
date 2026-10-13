@@ -37,6 +37,33 @@ def read_file(filename: str) -> str:
     return file_path.read_text(encoding="utf-8")
 
 
+@mcp.tool()
+def search_files(query: str) -> list[str]:
+    """Search text files in the workspace for a word or phrase."""
+    if not query or not query.strip():
+        raise ValueError("Search query cannot be empty.")
+
+    results = []
+
+    for path in sorted(WORKSPACE.iterdir()):
+        if not path.is_file() or path.is_symlink():
+            continue
+
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except UnicodeDecodeError:
+            # Ignore files that are not UTF-8 text files.
+            continue
+
+        for line_number, line in enumerate(lines, start=1):
+            if query.casefold() in line.casefold():
+                results.append(
+                    f"{path.name}:{line_number}: {line.strip()}"
+                )
+
+    return results
+
+
 @mcp.resource("file-assistant://notes")
 def notes_resource() -> str:
     """Provide the contents of the assistant's notes as an MCP resource."""
