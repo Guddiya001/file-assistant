@@ -1,0 +1,4 @@
+MCP stands for Model Context Protocol.
+MCP servers expose tools, resources, and prompts.
+Tools allow AI applications to invoke capabilities.
+Python is useful for building AI applications.
